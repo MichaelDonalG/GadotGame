@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://bbb3wqt8dbsqh"]
+
+[ext_resource type="Texture2D" uid="uid://cnw1cuadprrgq" path="res://Art/Sprout Lands - Sprites - Basic pack/Objects/Basic Furniture.png" id="1_gg64m"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_87gko"]
+size = Vector2(14, 11)
+
+[node name="table" type="Sprite2D"]
+texture = ExtResource("1_gg64m")
+hframes = 9
+vframes = 6
+frame = 30
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(0, 1.5)
+shape = SubResource("RectangleShape2D_87gko")

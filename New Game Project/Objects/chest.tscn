@@ -1,0 +1,77 @@
+[gd_scene load_steps=8 format=3 uid="uid://bx8o4pgktgr3e"]
+
+[ext_resource type="Texture2D" uid="uid://bxmcj0imger5e" path="res://Art/Sprout Lands - Sprites - Basic pack/Objects/Chest.png" id="1_1fw8t"]
+[ext_resource type="Script" path="res://Objects/Interaction.gd" id="2_j3k2k"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5e78p"]
+size = Vector2(14, 10)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ujkdx"]
+radius = 14.1421
+
+[sub_resource type="Animation" id="Animation_d4bxl"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_ffjqj"]
+resource_name = "opening"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0, 2]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_n5hqv"]
+_data = {
+"RESET": SubResource("Animation_d4bxl"),
+"opening": SubResource("Animation_ffjqj")
+}
+
+[node name="Chest" type="Area2D"]
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("2_j3k2k")
+interact_label = "Press E"
+interact_type = "chest"
+interact_value = "Yay!"
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_1fw8t")
+hframes = 5
+vframes = 2
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Sprite2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/StaticBody2D"]
+position = Vector2(0, 2)
+shape = SubResource("RectangleShape2D_5e78p")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_ujkdx")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_n5hqv")
+}
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="area_exited" from="." to="." method="_on_area_exited"]
