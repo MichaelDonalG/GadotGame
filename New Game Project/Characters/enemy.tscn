@@ -1,8 +1,7 @@
-[gd_scene load_steps=17 format=3 uid="uid://dv6y8bw5athsf"]
+[gd_scene load_steps=16 format=3 uid="uid://wv51xnjv3t0s"]
 
-[ext_resource type="Script" path="res://Characters/cow.gd" id="1_okvky"]
-[ext_resource type="Texture2D" uid="uid://bg131h6lvspda" path="res://Art/Sprout Lands - Sprites - Basic pack/Characters/Free Cow Sprites.png" id="2_plnap"]
-[ext_resource type="Script" path="res://Objects/Interaction.gd" id="3_tgvy5"]
+[ext_resource type="Texture2D" uid="uid://bg131h6lvspda" path="res://Art/Sprout Lands - Sprites - Basic pack/Characters/Free Cow Sprites.png" id="2_hjxqe"]
+[ext_resource type="Script" path="res://Objects/Interaction.gd" id="3_mmx65"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4ujaa"]
 size = Vector2(16, 13)
@@ -83,16 +82,15 @@ states/Walk/node = SubResource("AnimationNodeAnimation_583bk")
 states/Walk/position = Vector2(506, 100)
 transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_kg6nk"), "Idle", "Walk", SubResource("AnimationNodeStateMachineTransition_j072k"), "Walk", "Idle", SubResource("AnimationNodeStateMachineTransition_656gg")]
 
-[sub_resource type="AnimationNodeStateMachinePlayback" id="AnimationNodeStateMachinePlayback_3a181"]
+[sub_resource type="AnimationNodeStateMachinePlayback" id="AnimationNodeStateMachinePlayback_yiks5"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_8l31m"]
 
-[node name="cow" type="CharacterBody2D"]
-script = ExtResource("1_okvky")
-dialogue = "Moo"
+[node name="enemy" type="CharacterBody2D"]
+position = Vector2(283, -66)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("2_plnap")
+texture = ExtResource("2_hjxqe")
 hframes = 3
 vframes = 2
 
@@ -109,14 +107,14 @@ libraries = {
 tree_root = SubResource("AnimationNodeStateMachine_mqn1w")
 anim_player = NodePath("../AnimationPlayer")
 active = true
-parameters/playback = SubResource("AnimationNodeStateMachinePlayback_3a181")
+parameters/playback = SubResource("AnimationNodeStateMachinePlayback_yiks5")
 
 [node name="Timer" type="Timer" parent="."]
 
 [node name="Interactable" type="Area2D" parent="."]
 collision_layer = 0
 collision_mask = 2
-script = ExtResource("3_tgvy5")
+script = ExtResource("3_mmx65")
 interact_label = ""
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Interactable"]
@@ -132,6 +130,6 @@ offset_right = 30.0
 offset_bottom = 3.0
 scale = Vector2(0.5, 0.5)
 
-[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
-[connection signal="area_entered" from="Interactable" to="." method="_on_interactable_area_entered"]
-[connection signal="area_exited" from="Interactable" to="." method="_on_interactable_area_exited"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout" flags=18]
+[connection signal="area_entered" from="Interactable" to="." method="_on_interactable_area_entered" flags=18]
+[connection signal="area_exited" from="Interactable" to="." method="_on_interactable_area_exited" flags=18]

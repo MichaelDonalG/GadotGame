@@ -5,11 +5,13 @@ enum COW_STATE {IDLE, WALK}
 @export var move_speed : float = 20
 @export var idle_time : float = randi_range(1,5)
 @export var walk_time : float = randi_range(1,2)
+@export var dialogue = ""
 
 @onready var animation_tree = $AnimationTree
 @onready var state_machince = animation_tree.get("parameters/playback")
 @onready var sprite = $Sprite2D
 @onready var timer = $Timer
+@onready var interactable = 0
 
 var move_direction : Vector2 = Vector2.ZERO
 var current_state : COW_STATE = COW_STATE.IDLE
@@ -47,3 +49,14 @@ func pick_new_state():
 
 func _on_timer_timeout():
 	pick_new_state()
+
+
+func _on_interactable_area_entered(area):
+	$Label.text = dialogue
+	interactable = 1
+
+
+
+func _on_interactable_area_exited(area):
+	$Label.text = ""
+	interactable = 0
