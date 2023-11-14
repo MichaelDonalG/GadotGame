@@ -1,7 +1,7 @@
-[gd_scene load_steps=16 format=3 uid="uid://wv51xnjv3t0s"]
+[gd_scene load_steps=15 format=3 uid="uid://wv51xnjv3t0s"]
 
 [ext_resource type="Texture2D" uid="uid://bg131h6lvspda" path="res://Art/Sprout Lands - Sprites - Basic pack/Characters/Free Cow Sprites.png" id="2_hjxqe"]
-[ext_resource type="Script" path="res://Objects/Interaction.gd" id="3_mmx65"]
+[ext_resource type="Script" path="res://Scripts/Interaction.gd" id="3_mmx65"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4ujaa"]
 size = Vector2(16, 13)
@@ -82,8 +82,6 @@ states/Walk/node = SubResource("AnimationNodeAnimation_583bk")
 states/Walk/position = Vector2(506, 100)
 transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_kg6nk"), "Idle", "Walk", SubResource("AnimationNodeStateMachineTransition_j072k"), "Walk", "Idle", SubResource("AnimationNodeStateMachineTransition_656gg")]
 
-[sub_resource type="AnimationNodeStateMachinePlayback" id="AnimationNodeStateMachinePlayback_yiks5"]
-
 [sub_resource type="CircleShape2D" id="CircleShape2D_8l31m"]
 
 [node name="enemy" type="CharacterBody2D"]
@@ -107,7 +105,6 @@ libraries = {
 tree_root = SubResource("AnimationNodeStateMachine_mqn1w")
 anim_player = NodePath("../AnimationPlayer")
 active = true
-parameters/playback = SubResource("AnimationNodeStateMachinePlayback_yiks5")
 
 [node name="Timer" type="Timer" parent="."]
 

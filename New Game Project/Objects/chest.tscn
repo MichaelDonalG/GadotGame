@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://bx8o4pgktgr3e"]
 
 [ext_resource type="Texture2D" uid="uid://bxmcj0imger5e" path="res://Art/Sprout Lands - Sprites - Basic pack/Objects/Chest.png" id="1_1fw8t"]
-[ext_resource type="Script" path="res://Objects/Interaction.gd" id="2_j3k2k"]
+[ext_resource type="Script" path="res://Scripts/Interaction.gd" id="1_ga77n"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5e78p"]
 size = Vector2(14, 10)
@@ -49,10 +49,7 @@ _data = {
 [node name="Chest" type="Area2D"]
 collision_layer = 2
 collision_mask = 2
-script = ExtResource("2_j3k2k")
-interact_label = "Press E"
-interact_type = "chest"
-interact_value = "Yay!"
+script = ExtResource("1_ga77n")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_1fw8t")

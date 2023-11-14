@@ -1,6 +1,6 @@
-[gd_scene load_steps=30 format=3 uid="uid://c0fl7v1ttlh88"]
+[gd_scene load_steps=29 format=3 uid="uid://c0fl7v1ttlh88"]
 
-[ext_resource type="Script" path="res://Characters/player_character.gd" id="1_12e7s"]
+[ext_resource type="Script" path="res://Scripts/player_character.gd" id="1_12e7s"]
 [ext_resource type="Texture2D" uid="uid://cmoekunm7c4ob" path="res://Art/Sprout Lands - Sprites - Basic pack/Characters/Basic Charakter Spritesheet.png" id="1_qiwks"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bs5tp"]
@@ -235,8 +235,6 @@ states/Walk/node = SubResource("AnimationNodeBlendSpace2D_wbjsu")
 states/Walk/position = Vector2(438, 100)
 transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_4pswb"), "Idle", "Walk", SubResource("AnimationNodeStateMachineTransition_5l5tn"), "Walk", "Idle", SubResource("AnimationNodeStateMachineTransition_y8xya")]
 
-[sub_resource type="AnimationNodeStateMachinePlayback" id="AnimationNodeStateMachinePlayback_nyyxt"]
-
 [sub_resource type="CircleShape2D" id="CircleShape2D_behft"]
 radius = 14.0
 
@@ -261,7 +259,6 @@ libraries = {
 tree_root = SubResource("AnimationNodeStateMachine_rsp83")
 anim_player = NodePath("../AnimationPlayer")
 active = true
-parameters/playback = SubResource("AnimationNodeStateMachinePlayback_nyyxt")
 parameters/Idle/blend_position = Vector2(0, 0)
 parameters/Walk/blend_position = Vector2(0, 0)
 
@@ -276,10 +273,11 @@ shape = SubResource("CircleShape2D_behft")
 
 [node name="InteractLabel" type="Label" parent="InteractionComponents"]
 z_index = 100
-offset_left = -12.0
+offset_left = -571.0
 offset_top = -26.0
-offset_right = 28.0
+offset_right = 1343.0
 scale = Vector2(0.597593, 0.64603)
+text = "Open"
 horizontal_alignment = 1
 
 [connection signal="area_entered" from="InteractionComponents/InteractionArea" to="." method="_on_interaction_area_area_entered"]

@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://n73arlyrpf4l"]
 
-[ext_resource type="Script" path="res://Objects/Interaction.gd" id="1_asluj"]
+[ext_resource type="Script" path="res://Scripts/Interaction.gd" id="1_asluj"]
 [ext_resource type="Texture2D" uid="uid://cy3f3kbf7rqye" path="res://Art/Sprout Lands - Sprites - Basic pack/Tilesets/Wooden House.png" id="1_bprnb"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ic4q6"]

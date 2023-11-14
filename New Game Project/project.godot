@@ -12,8 +12,13 @@ config_version=5
 
 config/name="New Game Project"
 run/main_scene="res://Levels/game_level.tscn"
-config/features=PackedStringArray("4.0", "Mobile")
+config/features=PackedStringArray("4.1", "Mobile")
 config/icon="res://icon.svg"
+
+[autoload]
+
+State="*res://Scripts/state.gd"
+EventHandler="*res://Scripts/event_handler.gd"
 
 [display]
 

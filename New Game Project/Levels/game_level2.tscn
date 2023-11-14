@@ -532,7 +532,7 @@ position = Vector2(153, 108)
 
 [node name="PlayerCharacter" parent="." instance=ExtResource("1_1rrxb")]
 y_sort_enabled = true
-position = Vector2(120, 98)
+position = Vector2(119, 100)
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="PlayerCharacter"]
 remote_path = NodePath("../../Camera2D")
@@ -560,7 +560,7 @@ layer_2/tile_data = PackedInt32Array()
 metadata/_edit_lock_ = true
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(120, 98)
+position = Vector2(119, 100)
 
 [node name="Door" parent="." instance=ExtResource("10_risxm")]
 position = Vector2(120, 120)
@@ -568,7 +568,9 @@ interact_value = "res://Levels/game_level.tscn"
 
 [node name="Chest" parent="." instance=ExtResource("9_wdq8h")]
 position = Vector2(54, 100)
-interact_label = ""
+interact_type = "chest"
+interact_label = "Press E to open"
+interact_value = "Empty"
 
 [node name="furniture" type="Node2D" parent="."]
 y_sort_enabled = true
