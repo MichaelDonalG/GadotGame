@@ -11,7 +11,7 @@ var paused = 0
 
 func _ready():
 	set_health($PlayerPanel/PlayerData/ProgressBar, State.current_health, State.max_health) 
-	set_health($EnemyContainer/VBoxContainer/ProgressBar, enemy.health, enemy.damage)
+	set_health($EnemyContainer/VBoxContainer/ProgressBar, enemy.health, enemy.health)
 	$EnemyContainer/TextureRect.texture = enemy.texture
 	
 	current_player_health = State.current_health
@@ -38,8 +38,6 @@ func display_text(text):
 	$TextBox/Text.text = text
 
 
-
-
 func enemy_turn():
 	display_text("%s attacks" % enemy.name)
 	await get_tree().create_timer(1.0). timeout
@@ -61,9 +59,6 @@ func enemy_turn():
 		await($player/AnimationPlayer.animation_finished)
 
 
-
-
-
 func _on_run_pressed():
 	display_text("Got away safely")
 	await(get_tree().create_timer(0.5).timeout)
@@ -82,11 +77,12 @@ func _on_attack_pressed():
 	$AnimationPlayer.play("enemy_damaged")
 	await($AnimationPlayer.animation_finished)
 	
-	if current_enemy_health ==0:
+	if current_enemy_health <= 0:
 		display_text("Enemy defeated!")
 		$AnimationPlayer.play("enemy_died")
 		await($AnimationPlayer.animation_finished)
 		State.current_health = current_player_health
+		State.remove_enemy()
 		get_tree().change_scene_to_file("res://Levels/game_level.tscn")
 	
 	enemy_turn()

@@ -550,19 +550,23 @@ position = Vector2(39, 14)
 [node name="cow" parent="." instance=ExtResource("7_jwilg")]
 position = Vector2(260, 4)
 enemy_type = "Cow"
+enemy_num = 1
 
 [node name="cow2" parent="." instance=ExtResource("7_jwilg")]
 position = Vector2(-76, 72)
 enemy_type = "Cow2"
+enemy_num = 2
 
 [node name="cow3" parent="." instance=ExtResource("7_jwilg")]
 position = Vector2(188, -69)
 enemy_type = "Cow"
+enemy_num = 3
 
 [node name="cow4" parent="." instance=ExtResource("7_jwilg")]
 position = Vector2(283, -66)
 dialogue = "Meow"
 enemy_type = "Cow2"
+enemy_num = 4
 
 [node name="Chest" parent="." instance=ExtResource("8_uf47h")]
 interact_label = "Press E to open"

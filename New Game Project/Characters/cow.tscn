@@ -1,6 +1,6 @@
 [gd_scene load_steps=16 format=3 uid="uid://dv6y8bw5athsf"]
 
-[ext_resource type="Script" path="res://Scripts/cow.gd" id="1_okvky"]
+[ext_resource type="Script" path="res://Scripts/enemy.gd" id="1_hi0b1"]
 [ext_resource type="Texture2D" uid="uid://bg131h6lvspda" path="res://Art/Sprout Lands - Sprites - Basic pack/Characters/Free Cow Sprites.png" id="2_plnap"]
 [ext_resource type="Script" path="res://Scripts/Interaction.gd" id="3_tgvy5"]
 
@@ -86,7 +86,7 @@ transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition
 [sub_resource type="CircleShape2D" id="CircleShape2D_8l31m"]
 
 [node name="cow" type="CharacterBody2D"]
-script = ExtResource("1_okvky")
+script = ExtResource("1_hi0b1")
 dialogue = "Moo"
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
