@@ -236,7 +236,6 @@ states/Walk/position = Vector2(438, 100)
 transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_4pswb"), "Idle", "Walk", SubResource("AnimationNodeStateMachineTransition_5l5tn"), "Walk", "Idle", SubResource("AnimationNodeStateMachineTransition_y8xya")]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_behft"]
-radius = 14.0
 
 [node name="PlayerCharacter" type="CharacterBody2D"]
 script = ExtResource("1_12e7s")
@@ -277,7 +276,6 @@ offset_left = -571.0
 offset_top = -26.0
 offset_right = 1343.0
 scale = Vector2(0.597593, 0.64603)
-text = "Open"
 horizontal_alignment = 1
 
 [connection signal="area_entered" from="InteractionComponents/InteractionArea" to="." method="_on_interaction_area_area_entered"]

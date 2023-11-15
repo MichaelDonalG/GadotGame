@@ -11,9 +11,12 @@ class_name Interactable extends Area2D
 func _physics_process(delta):
 	if Input.is_action_just_pressed("interact"):
 		if interactable:
-			$AnimationPlayer.play("opening")
-			if (interact_type == "door"):
+			if(interact_type == "chest"):
+				$AnimationPlayer.play("opening")
+			elif(interact_type == "door"):
 				get_tree().change_scene_to_file(interact_value)
+			elif(interact_type == "bed"):
+				State.current_health = State.max_health
 
 
 

@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://ymaooe54cls2"]
+
+[ext_resource type="Script" path="res://Scripts/Interaction.gd" id="1_hktuj"]
+[ext_resource type="PackedScene" uid="uid://8yrqgpsqb213" path="res://Objects/furniture.tscn" id="2_lj3wr"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ujkdx"]
+radius = 14.1421
+
+[node name="bed" type="Area2D"]
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("1_hktuj")
+interact_type = "bed"
+interact_label = "Press E to sleep"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_ujkdx")
+
+[node name="furniture" parent="." instance=ExtResource("2_lj3wr")]
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="area_exited" from="." to="." method="_on_area_exited"]

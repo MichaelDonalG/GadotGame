@@ -77,5 +77,6 @@ func execute_interaction():
 		match  cur_interaction.interact_type:
 			"chest" : 
 				interactLabel.text = "Empty..."
-				
+			"bed" :
+				interactLabel.text = "Feeling rested"
 

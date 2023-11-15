@@ -84,6 +84,7 @@ states/Walk/position = Vector2(506, 100)
 transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_kg6nk"), "Idle", "Walk", SubResource("AnimationNodeStateMachineTransition_j072k"), "Walk", "Idle", SubResource("AnimationNodeStateMachineTransition_656gg")]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_8l31m"]
+radius = 4.36569
 
 [node name="cow" type="CharacterBody2D"]
 script = ExtResource("1_hi0b1")
@@ -113,6 +114,7 @@ active = true
 [node name="Interactable" type="Area2D" parent="."]
 collision_layer = 0
 collision_mask = 2
+monitorable = false
 script = ExtResource("3_tgvy5")
 interact_label = ""
 
