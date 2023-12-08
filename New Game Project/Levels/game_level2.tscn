@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://bo2sdil4wb4x0"]
+[gd_scene load_steps=23 format=3 uid="uid://bo2sdil4wb4x0"]
 
 [ext_resource type="PackedScene" uid="uid://c0fl7v1ttlh88" path="res://Characters/player_character.tscn" id="1_1rrxb"]
 [ext_resource type="Texture2D" uid="uid://cn65wqk5quc8x" path="res://Art/Sprout Lands - Sprites - Basic pack/Tilesets/ground tiles/new tiles/Grass hill tiles v.2.png" id="2_08qh1"]
@@ -443,7 +443,7 @@ texture = ExtResource("7_7b2cj")
 2:1/0 = 0
 2:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 2:1/0/physics_layer_0/angular_velocity = 0.0
-2:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(3, 8, 8, 8, 8, -8, 3, -8)
+2:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, -3.0625, -8, -3.1875, 8, -8, 8)
 3:1/0 = 0
 3:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 3:1/0/physics_layer_0/angular_velocity = 0.0
@@ -467,7 +467,7 @@ texture = ExtResource("7_7b2cj")
 2:2/0 = 0
 2:2/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 2:2/0/physics_layer_0/angular_velocity = 0.0
-2:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-3.5, 8, -8, 8, -8, -8, -3.5, -8)
+2:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, -3.0625, -8, -3.1875, 8, -8, 8)
 3:2/0 = 0
 3:2/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 3:2/0/physics_layer_0/angular_velocity = 0.0
@@ -491,7 +491,7 @@ texture = ExtResource("7_7b2cj")
 2:3/0 = 0
 2:3/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 2:3/0/physics_layer_0/angular_velocity = 0.0
-2:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-3.5, 8, -8, 8, -8, -8, -3.5, -8)
+2:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, -3.0625, -8, -3.1875, 8, -8, 8)
 3:3/0 = 0
 3:3/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 3:3/0/physics_layer_0/angular_velocity = 0.0
@@ -525,6 +525,25 @@ sources/2 = SubResource("TileSetAtlasSource_a7ds0")
 sources/3 = SubResource("TileSetAtlasSource_n221p")
 sources/4 = SubResource("TileSetAtlasSource_tqk4m")
 sources/5 = SubResource("TileSetAtlasSource_brct3")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_iqnhp"]
+bg_color = Color(0, 0, 0, 0.486275)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wmbnq"]
+bg_color = Color(1, 0, 0.109804, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sg3bp"]
+bg_color = Color(0.0862745, 0.72549, 0, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0, 0, 0, 1)
 
 [node name="Game Level" type="Node2D"]
 y_sort_enabled = true
@@ -561,6 +580,41 @@ metadata/_edit_lock_ = true
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(119, 100)
+
+[node name="PlayerPanel" type="Panel" parent="Camera2D"]
+offset_left = 126.0
+offset_top = 78.0
+offset_right = 596.0
+offset_bottom = 123.0
+scale = Vector2(0.2, 0.2)
+theme_override_styles/panel = SubResource("StyleBoxFlat_iqnhp")
+
+[node name="PlayerData" type="HBoxContainer" parent="Camera2D/PlayerPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_right = -8.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="Camera2D/PlayerPanel/PlayerData"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Player"
+
+[node name="ProgressBar" type="ProgressBar" parent="Camera2D/PlayerPanel/PlayerData"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_styles/background = SubResource("StyleBoxFlat_wmbnq")
+theme_override_styles/fill = SubResource("StyleBoxFlat_sg3bp")
+step = 1.0
+value = 50.0
+show_percentage = false
 
 [node name="Door" parent="." instance=ExtResource("10_risxm")]
 position = Vector2(120, 120)

@@ -1,6 +1,7 @@
-[gd_scene load_steps=18 format=3 uid="uid://bqbeei4uh2u1u"]
+[gd_scene load_steps=23 format=3 uid="uid://bqbeei4uh2u1u"]
 
 [ext_resource type="PackedScene" uid="uid://c0fl7v1ttlh88" path="res://Characters/player_character.tscn" id="1_2ojkx"]
+[ext_resource type="PackedScene" uid="uid://del4oy7ack5g7" path="res://Characters/follower.tscn" id="2_2vw67"]
 [ext_resource type="Texture2D" uid="uid://cn65wqk5quc8x" path="res://Art/Sprout Lands - Sprites - Basic pack/Tilesets/ground tiles/new tiles/Grass hill tiles v.2.png" id="2_skonu"]
 [ext_resource type="Texture2D" uid="uid://clgir762vjfdg" path="res://Art/Sprout Lands - Sprites - Basic pack/Tilesets/Fences.png" id="3_m62en"]
 [ext_resource type="Texture2D" uid="uid://domx8p7w5g53v" path="res://Art/Sprout Lands - Sprites - Basic pack/Tilesets/Water.png" id="4_4x7g4"]
@@ -519,11 +520,33 @@ sources/3 = SubResource("TileSetAtlasSource_n221p")
 sources/4 = SubResource("TileSetAtlasSource_tqk4m")
 sources/5 = SubResource("TileSetAtlasSource_brct3")
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nv01q"]
+bg_color = Color(0, 0, 0, 0.486275)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cqfdh"]
+bg_color = Color(1, 0, 0.109804, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6rkl5"]
+bg_color = Color(0.0862745, 0.72549, 0, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0, 0, 0, 1)
+
+[sub_resource type="Curve2D" id="Curve2D_n2au5"]
+
 [node name="Game Level" type="Node2D"]
 y_sort_enabled = true
 position = Vector2(153, 108)
 
 [node name="PlayerCharacter" parent="." instance=ExtResource("1_2ojkx")]
+z_index = 1
 y_sort_enabled = true
 position = Vector2(47, 25)
 
@@ -554,6 +577,41 @@ metadata/_edit_lock_ = true
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(47, 25)
+
+[node name="PlayerPanel" type="Panel" parent="Camera2D"]
+offset_left = 126.0
+offset_top = 78.0
+offset_right = 596.0
+offset_bottom = 123.0
+scale = Vector2(0.2, 0.2)
+theme_override_styles/panel = SubResource("StyleBoxFlat_nv01q")
+
+[node name="PlayerData" type="HBoxContainer" parent="Camera2D/PlayerPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_right = -8.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="Camera2D/PlayerPanel/PlayerData"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Player"
+
+[node name="ProgressBar" type="ProgressBar" parent="Camera2D/PlayerPanel/PlayerData"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_styles/background = SubResource("StyleBoxFlat_cqfdh")
+theme_override_styles/fill = SubResource("StyleBoxFlat_6rkl5")
+step = 1.0
+value = 50.0
+show_percentage = false
 
 [node name="cow" parent="." instance=ExtResource("7_jwilg")]
 position = Vector2(260, 4)
@@ -587,3 +645,13 @@ position = Vector2(196, 33)
 [node name="Door" parent="." instance=ExtResource("10_n4ai5")]
 position = Vector2(40, -8)
 interact_value = "res://Levels/game_level2.tscn"
+
+[node name="Path2D" type="Path2D" parent="."]
+curve = SubResource("Curve2D_n2au5")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Path2D"]
+position = Vector2(119, 123)
+rotates = false
+loop = false
+
+[node name="CharacterBody2D" parent="Path2D/PathFollow2D" instance=ExtResource("2_2vw67")]

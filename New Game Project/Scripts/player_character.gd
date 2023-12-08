@@ -4,11 +4,13 @@ extends CharacterBody2D
 @export var starting_direction : Vector2 = Vector2(0,1)
 #parameters/Idle/blend_position
 
-@onready var animation_tree = $AnimationTree
-@onready var state_machine = animation_tree.get("parameters/playback")
+
+@onready var state_machine = $AnimationTree.get("parameters/playback")
 
 @onready var all_interactions = []
 @onready var interactLabel = $InteractionComponents/InteractLabel
+
+var follower_counter = 0
 
 func _ready():
 	update_animation_paramaeters(starting_direction)
@@ -17,6 +19,9 @@ func _ready():
 		position.y = State.playery
 		State.playerx = null
 		State.playery = null
+	
+	set_health($"../Camera2D/PlayerPanel/PlayerData/ProgressBar", State.current_health, State.max_health) 
+	
 
 
 
@@ -41,11 +46,20 @@ func _physics_process(_delta):
 	move_and_slide()
 	
 	pick_new_state()
+	
+	####################Follower Code################### 		NEEDS WORK!
+	add_point_to_path(Vector2(position.x, position.y))
+	if $"../Path2D/PathFollow2D".progress_ratio <= .5 :
+		$"../Path2D/PathFollow2D".progress_ratio  += .1 * _delta
+	if $"../Path2D".curve.get_point_count() >= 15 :
+		remove_point_from_path(0)
+	
+	
 
 func update_animation_paramaeters(move_inpt: Vector2):
 	if(move_inpt != Vector2.ZERO):
-		animation_tree.set("parameters/Walk/blend_position", move_inpt)
-		animation_tree.set("parameters/Idle/blend_position", move_inpt)
+		$AnimationTree.set("parameters/Walk/blend_position", move_inpt)
+		$AnimationTree.set("parameters/Idle/blend_position", move_inpt)
 
 
 func pick_new_state():
@@ -79,4 +93,18 @@ func execute_interaction():
 				interactLabel.text = "Empty..."
 			"bed" :
 				interactLabel.text = "Feeling rested"
+				set_health($"../Camera2D/PlayerPanel/PlayerData/ProgressBar", State.current_health, State.max_health) 
+				State.current_health = State.max_health
+
+###############UI Functions#############
+func set_health(progress_bar, health, max_health):
+	progress_bar.value = health
+	progress_bar.max_value = max_health
+
+################Follower Functions######################
+func add_point_to_path(new_point: Vector2):
+	$"../Path2D".curve.add_point(new_point)
+
+func remove_point_from_path(index: int):
+	$"../Path2D".curve.remove_point(index)
 

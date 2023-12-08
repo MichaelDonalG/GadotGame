@@ -84,8 +84,8 @@ func _on_attack_pressed():
 		State.current_health = current_player_health
 		State.remove_enemy()
 		get_tree().change_scene_to_file("res://Levels/game_level.tscn")
-	
-	enemy_turn()
+	else:
+		enemy_turn()
 
 
 func _on_defend_pressed():

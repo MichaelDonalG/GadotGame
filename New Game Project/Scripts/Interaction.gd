@@ -15,8 +15,6 @@ func _physics_process(delta):
 				$AnimationPlayer.play("opening")
 			elif(interact_type == "door"):
 				get_tree().change_scene_to_file(interact_value)
-			elif(interact_type == "bed"):
-				State.current_health = State.max_health
 
 
 
