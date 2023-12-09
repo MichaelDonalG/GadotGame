@@ -2,7 +2,6 @@ extends CharacterBody2D
 
 @export var move_speed : float = 100
 @export var starting_direction : Vector2 = Vector2(0,1)
-#parameters/Idle/blend_position
 
 
 @onready var state_machine = $AnimationTree.get("parameters/playback")
@@ -19,11 +18,7 @@ func _ready():
 		position.y = State.playery
 		State.playerx = null
 		State.playery = null
-	
-	set_health($"../Camera2D/PlayerPanel/PlayerData/ProgressBar", State.current_health, State.max_health) 
-	
-
-
+	set_health($"../Camera2D/PlayerPanel/PlayerData/ProgressBar", State.current_health, State.max_health)
 
 #########################Player Movement#########################
 
@@ -47,11 +42,13 @@ func _physics_process(_delta):
 	
 	pick_new_state()
 	
-	####################Follower Code################### 		NEEDS WORK!
+	####################Follower Code###################
 	add_point_to_path(Vector2(position.x, position.y))
-	if $"../Path2D/PathFollow2D".progress_ratio <= .5 :
+	if $"../Path2D/PathFollow2D".progress_ratio <= .5:
 		$"../Path2D/PathFollow2D".progress_ratio  += .1 * _delta
-	if $"../Path2D".curve.get_point_count() >= 15 :
+	else:
+		$"../Path2D/PathFollow2D".progress_ratio = .5
+	if $"../Path2D".curve.get_point_count() >= 10:
 		remove_point_from_path(0)
 	
 	

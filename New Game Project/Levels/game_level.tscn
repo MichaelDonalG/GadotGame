@@ -650,7 +650,7 @@ interact_value = "res://Levels/game_level2.tscn"
 curve = SubResource("Curve2D_n2au5")
 
 [node name="PathFollow2D" type="PathFollow2D" parent="Path2D"]
-position = Vector2(119, 123)
+position = Vector2(476, 58)
 rotates = false
 loop = false
 
