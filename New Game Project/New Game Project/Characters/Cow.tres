@@ -1,0 +1,11 @@
+[gd_resource type="Resource" load_steps=3 format=3 uid="uid://l3swlf5qrifg"]
+
+[ext_resource type="Script" path="res://Scripts/BaseEnemy.gd" id="1_hc3es"]
+[ext_resource type="Texture2D" uid="uid://dwl1r0b61xiav" path="res://Art/Sprout Lands - Sprites - Basic pack/Characters/Free Cow Enemy Sprites.png" id="2_35uyc"]
+
+[resource]
+script = ExtResource("1_hc3es")
+name = "Cow"
+texture = ExtResource("2_35uyc")
+health = 50
+damage = 10

@@ -1,0 +1,132 @@
+[gd_scene load_steps=15 format=3 uid="uid://wv51xnjv3t0s"]
+
+[ext_resource type="Texture2D" uid="uid://bg131h6lvspda" path="res://Art/Sprout Lands - Sprites - Basic pack/Characters/Free Cow Sprites.png" id="2_hjxqe"]
+[ext_resource type="Script" path="res://Scripts/Interaction.gd" id="3_mmx65"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4ujaa"]
+size = Vector2(16, 13)
+
+[sub_resource type="Animation" id="Animation_rw5jf"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_ibtwr"]
+resource_name = "cow_idle"
+length = 0.6
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, 2]
+}
+
+[sub_resource type="Animation" id="Animation_x5u2c"]
+resource_name = "cow_walk"
+length = 0.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [3, 4]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_qo52t"]
+_data = {
+"RESET": SubResource("Animation_rw5jf"),
+"cow_idle": SubResource("Animation_ibtwr"),
+"cow_walk": SubResource("Animation_x5u2c")
+}
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_2a2vn"]
+animation = &"cow_idle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_583bk"]
+animation = &"cow_walk"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_kg6nk"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_j072k"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_656gg"]
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_mqn1w"]
+states/Idle/node = SubResource("AnimationNodeAnimation_2a2vn")
+states/Idle/position = Vector2(341, 100)
+states/Walk/node = SubResource("AnimationNodeAnimation_583bk")
+states/Walk/position = Vector2(506, 100)
+transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_kg6nk"), "Idle", "Walk", SubResource("AnimationNodeStateMachineTransition_j072k"), "Walk", "Idle", SubResource("AnimationNodeStateMachineTransition_656gg")]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_8l31m"]
+
+[node name="enemy" type="CharacterBody2D"]
+position = Vector2(283, -66)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_hjxqe")
+hframes = 3
+vframes = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-2, 6.5)
+shape = SubResource("RectangleShape2D_4ujaa")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_qo52t")
+}
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource("AnimationNodeStateMachine_mqn1w")
+anim_player = NodePath("../AnimationPlayer")
+active = true
+
+[node name="Timer" type="Timer" parent="."]
+
+[node name="Interactable" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("3_mmx65")
+interact_label = ""
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Interactable"]
+position = Vector2(-2, 6)
+scale = Vector2(2.29059, 1.22919)
+shape = SubResource("CircleShape2D_8l31m")
+
+[node name="Label" type="Label" parent="."]
+layout_direction = 1
+offset_left = -10.0
+offset_top = -20.0
+offset_right = 30.0
+offset_bottom = 3.0
+scale = Vector2(0.5, 0.5)
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout" flags=18]
+[connection signal="area_entered" from="Interactable" to="." method="_on_interactable_area_entered" flags=18]
+[connection signal="area_exited" from="Interactable" to="." method="_on_interactable_area_exited" flags=18]

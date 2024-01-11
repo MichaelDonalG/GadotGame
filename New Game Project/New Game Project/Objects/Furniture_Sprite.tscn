@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://liod7gncsdfg"]
+
+[ext_resource type="Texture2D" uid="uid://cnw1cuadprrgq" path="res://Art/Sprout Lands - Sprites - Basic pack/Objects/Basic Furniture.png" id="1_wl75b"]
+
+[node name="furniture" type="Sprite2D"]
+texture = ExtResource("1_wl75b")
+hframes = 9
+vframes = 4
+frame = 25
