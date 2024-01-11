@@ -18,7 +18,8 @@ func _ready():
 		position.y = State.playery
 		State.playerx = null
 		State.playery = null
-	set_health($"../Camera2D/PlayerPanel/PlayerData/ProgressBar", State.current_health, State.max_health)
+		State.enemy2 = null
+	set_health($"../Camera2D/PlayerPanel/PlayerData/ProgressBar")
 
 #########################Player Movement#########################
 
@@ -90,13 +91,13 @@ func execute_interaction():
 				interactLabel.text = "Empty..."
 			"bed" :
 				interactLabel.text = "Feeling rested"
-				set_health($"../Camera2D/PlayerPanel/PlayerData/ProgressBar", State.current_health, State.max_health) 
 				State.current_health = State.max_health
+				set_health($"../Camera2D/PlayerPanel/PlayerData/ProgressBar") 
 
 ###############UI Functions#############
-func set_health(progress_bar, health, max_health):
-	progress_bar.value = health
-	progress_bar.max_value = max_health
+func set_health(progress_bar):
+	progress_bar.value = State.current_health
+	progress_bar.max_value = State.max_health
 
 ################Follower Functions######################
 func add_point_to_path(new_point: Vector2):

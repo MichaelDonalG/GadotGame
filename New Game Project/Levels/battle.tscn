@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://colt26f7oy7l5"]
+[gd_scene load_steps=36 format=3 uid="uid://colt26f7oy7l5"]
 
 [ext_resource type="Texture2D" uid="uid://cn65wqk5quc8x" path="res://Art/Sprout Lands - Sprites - Basic pack/Tilesets/ground tiles/new tiles/Grass hill tiles v.2.png" id="1_c0tyr"]
 [ext_resource type="Script" path="res://Scripts/battle.gd" id="1_rxw0g"]
@@ -608,18 +608,6 @@ border_color = Color(1, 1, 1, 1)
 
 [sub_resource type="Animation" id="Animation_wvdgh"]
 length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("EnemyContainer/TextureRect:modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 1)]
-}
 
 [sub_resource type="Animation" id="Animation_24416"]
 resource_name = "enemy_damaged"
@@ -627,7 +615,7 @@ length = 0.6
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("EnemyContainer/TextureRect:modulate")
+tracks/0/path = NodePath("EnemyContainer/AttackEnemy1:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -642,7 +630,37 @@ resource_name = "enemy_died"
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("EnemyContainer/TextureRect:modulate")
+tracks/0/path = NodePath("EnemyContainer/AttackEnemy1:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_q4dwp"]
+resource_name = "enemy2_damaged"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("EnemyContainer2/AttackEnemy2:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.3001, 0.4, 0.5, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_obfos"]
+resource_name = "enemy2_died"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("EnemyContainer2/AttackEnemy2:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -655,8 +673,10 @@ tracks/0/keys = {
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_xvjx1"]
 _data = {
 "RESET": SubResource("Animation_wvdgh"),
-"enemy_damaged": SubResource("Animation_24416"),
-"enemy_died": SubResource("Animation_5m46f")
+"enemy1_damaged": SubResource("Animation_24416"),
+"enemy1_died": SubResource("Animation_5m46f"),
+"enemy2_damaged": SubResource("Animation_q4dwp"),
+"enemy2_died": SubResource("Animation_obfos")
 }
 
 [node name="Battle" type="Control"]
@@ -723,7 +743,7 @@ layout_mode = 2
 alignment = 1
 
 [node name="ProgressBar" type="ProgressBar" parent="EnemyContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 20)
+custom_minimum_size = Vector2(0, 10)
 layout_mode = 2
 theme_override_styles/background = SubResource("StyleBoxFlat_e61h2")
 theme_override_styles/fill = SubResource("StyleBoxFlat_0soju")
@@ -731,8 +751,10 @@ step = 1.0
 value = 50.0
 show_percentage = false
 
-[node name="TextureRect" type="TextureRect" parent="EnemyContainer"]
+[node name="AttackEnemy1" type="TextureButton" parent="EnemyContainer"]
 layout_mode = 2
+disabled = true
+stretch_mode = 0
 
 [node name="PlayerPanel" type="Panel" parent="."]
 layout_mode = 0
@@ -857,6 +879,34 @@ libraries = {
 "": SubResource("AnimationLibrary_xvjx1")
 }
 
+[node name="EnemyContainer2" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_left = -73.0
+offset_top = 61.0
+offset_right = -33.0
+offset_bottom = 101.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="EnemyContainer2"]
+layout_mode = 2
+alignment = 1
+
+[node name="ProgressBar" type="ProgressBar" parent="EnemyContainer2/VBoxContainer"]
+visible = false
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_e61h2")
+theme_override_styles/fill = SubResource("StyleBoxFlat_0soju")
+step = 1.0
+value = 50.0
+show_percentage = false
+
+[node name="AttackEnemy2" type="TextureButton" parent="EnemyContainer2"]
+layout_mode = 2
+stretch_mode = 0
+
+[connection signal="pressed" from="EnemyContainer/AttackEnemy1" to="." method="_on_attack_enemy_1_pressed"]
+[connection signal="pressed" from="EnemyContainer/AttackEnemy1" to="." method="_on_texture_button_pressed"]
 [connection signal="pressed" from="ActionsPanel/Actions/Attack" to="." method="_on_attack_pressed"]
 [connection signal="pressed" from="ActionsPanel/Actions/Defend" to="." method="_on_defend_pressed"]
 [connection signal="pressed" from="ActionsPanel/Actions/Run" to="." method="_on_run_pressed"]
+[connection signal="pressed" from="EnemyContainer2/AttackEnemy2" to="." method="_on_attack_enemy_2_pressed"]

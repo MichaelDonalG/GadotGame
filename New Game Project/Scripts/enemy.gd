@@ -5,7 +5,8 @@ extends CharacterBody2D
 @export var idle_time : float = randi_range(1,5)
 @export var walk_time : float = randi_range(1,2)
 @export var dialogue = ""
-@export var enemy_type = "cow"
+@export var enemy_type1 = "cow"
+@export var enemy_type2 = "null"
 @export var enemy_num = 0
 
 @onready var animation_tree = $AnimationTree
@@ -61,7 +62,11 @@ func _on_timer_timeout():
 
 
 func _on_interactable_area_entered(area):
+	State.enemy_type2 = "null"
+	
 	State.save_position(position.x, position.y)
-	State.enemy_type = enemy_type
+	State.enemy_type1 = enemy_type1
+	State.enemy_type2 = enemy_type2
 	State.defeated_enemy = enemy_num
+	State.load_enemy()
 	get_tree().change_scene_to_file("res://Levels/battle.tscn")
